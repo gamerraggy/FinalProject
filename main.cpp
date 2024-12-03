@@ -11,19 +11,20 @@ void shop();
 
 
 int main() {
+	cout << "make sure to use all lower capitals, and if the word" << endl;
+	cout << "is all capitals then its an path you can type." << endl;
+	cout << "YOU ARE EMPLOYED!" << endl;
+	cout << "You are hired at a private company and you have to deal with people" << endl;
+	cout << "trespassing on abandoned buildings. Today is your first" << endl;
+	cout << "day on the job. Well what are you" << endl;
+	cout << "waiting for? Go get em champ!" << endl;
 	srand(time(NULL)); //seeds your number GEN
 	int room = 1;
 	string input;
 	while (playerHealth > 0) { //game loop
+		
 		switch (room) {
 		case 1:
-			cout << "make sure to use all lower capitals, and if the word" << endl;
-			cout << "is all capitals then its an path you can type." << endl;
-			cout << "YOU ARE EMPLOYED!" << endl;
-			cout << "You are hired at a private company and you have to clean up contamination leaks!" << endl;
-			cout << "Your first day of the job has you at an abandoned building where people" << endl;
-			cout << "have been hearing odd noises of screaming... Well what are you" << endl;
-			cout << "waiting for? Go get em champ!" << endl;
 			cout << "You walk in the building and see an old reception desk. You can go NORTH or SOUTH." << endl;
 			cin >> input;
 			if (input == "south")
@@ -56,6 +57,28 @@ int main() {
 			break;
 		case 4:
 			BattleSim();
+			cout << "There is a huge metal door.." << endl;
+			cout << "You can go WEST or SOUTH." << endl;
+			cin >> input;
+			if (input == "west")
+				room = 3;
+			if (input == "south")
+				room = 5;
+			break;
+		case 5:
+			cout << "There is a chest on the floor but its locked" << endl;
+			cout << "A note reads:" << endl;
+			cout << "The key is in the desk, you will need it..." << endl;
+			cout << "You can OPEN or go NORTH." << endl;
+			cin >> input;
+			if (input == "open")
+				if (inventory[0] == "Key") {
+					cout << "You unlock the chest with the KEY and got a SWORD!" << endl;
+					inventory[1] == "Sword"
+					inventory[0] = " "; //no more key
+				}
+				else {
+					cout << "The door rattles. It is locked" << endl;
 
 		}
 	}// end of game loop
