@@ -4,11 +4,10 @@ using namespace std;
 //inventory using array
 string inventory[10];
 int money = 10;
-void BattleSim();
 int playerHealth = 100;
 //function declaration
 void shop();
-
+void BattleSim();
 
 int main() {
 	cout << "make sure to use all lower capitals, and if the word" << endl;
@@ -22,7 +21,7 @@ int main() {
 	int room = 1;
 	string input;
 	while (playerHealth > 0) { //game loop
-		
+
 		switch (room) {
 		case 1:
 			cout << "You walk in the building and see an old reception desk. You can go NORTH or SOUTH." << endl;
@@ -31,6 +30,8 @@ int main() {
 				room = 2;
 			else if (input == "north")
 				room = 6;
+			else if (input == "key" || "grab")
+				inventory[0] = "Key";
 
 			break;
 		case 2:
@@ -56,7 +57,7 @@ int main() {
 				room = 4;
 			break;
 		case 4:
-			BattleSim();
+			//BattleSim(); //NEED TO ADD LATER BUT NOT RIGHT NOW
 			cout << "There is a huge metal door.." << endl;
 			cout << "You can go WEST or SOUTH." << endl;
 			cin >> input;
@@ -66,26 +67,48 @@ int main() {
 				room = 5;
 			break;
 		case 5:
-			cout << "There is a chest on the floor but its locked" << endl;
-			cout << "A note reads:" << endl;
-			cout << "The key is in the desk, you will need it..." << endl;
 			cout << "You can OPEN or go NORTH." << endl;
+			if (inventory[1] != "Sword") {
+				cout << "There is a chest on the floor but its locked" << endl;
+				cout << "A note reads:" << endl;
+				cout << "The key is in the desk, you will need it..." << endl;
+			}
 			cin >> input;
 			if (input == "open")
 				if (inventory[0] == "Key") {
 					cout << "You unlock the chest with the KEY and got a SWORD!" << endl;
-					inventory[1] == "Sword"
+					inventory[1] = "Sword";
 					inventory[0] = " "; //no more key
 				}
 				else {
-					cout << "The door rattles. It is locked" << endl;
+					cout << "The chest rattles. It is locked" << endl;
 
-		}
-	}// end of game loop
-	if (playerHealth <= 0)
+				}
+			else if (input == "north")
+				room = 4;
+			break;
+		case 6:
+			cout << "You walk into the room and see a goblin blocking the door" << endl;
+			cout << "Goblin: 'goo goo ga ga' (Fight me to get through or pay me)" << endl;
+			cout << "FIGHT or PAY 20 coins? Or just go SOUTH." << endl;
+			cin >> input;
+			if (input == "fight")
+				BattleSim();
+			else if (input == "pay")
+				room = 7;
+			else if (input == "south")
+				room = 1;
+			else if (input == "nah")
+				cout << "Goblin: 'raaa raa go' (I didn't know you were chill like that" << endl;
+				room = 7;
+			break;
+		}// end of game loop
+
+	}if (playerHealth <= 0)
 		cout << "GAME OVER" << endl;
 	else
 		cout << "YOU WIN!" << endl;
+
 }
 
 void BattleSim() {
