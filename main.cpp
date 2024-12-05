@@ -99,9 +99,40 @@ int main() {
 			else if (input == "south")
 				room = 1;
 			else if (input == "nah")
-				cout << "Goblin: 'raaa raa go' (I didn't know you were chill like that" << endl;
+				cout << "Goblin: 'raaa raa go' (I didn't know you were chill like that)" << endl;
 				room = 7;
 			break;
+		case 7:
+			cout << "You walk into a fancy room with a huge door." << endl;
+			cout << "Go WEST or go EAST" << endl;
+			cin >> input;
+			if (input == "west")
+				room = 6;
+			else if (input == "east")
+				room = 8;
+			else if (input == "rest")
+				cout << "Go Foward" << endl;
+			break;
+		case 8:
+			cout << "After what felt like forever you reach a huge metal door." << endl;
+			cout << "Enter and go EAST or walk all the way back and go WEST." << endl;
+			cin >> input;
+			if (input == "west")
+				room = 7;
+			else if (input == "east")
+				room = 9;
+			break;
+		case 9:
+			shop();
+			cout << "Continue thy path and venture EAST (You can't go west btw)" << endl;
+			cin >> input;
+			if (input == "west")
+				cout << "I just said you couldn't go west" << endl;
+			if (input == "east")
+				room = 10;
+			break;
+		case 10:
+			cout << "A huge slime blob stand before you." << endl;
 		}// end of game loop
 
 	}if (playerHealth <= 0)
@@ -149,14 +180,14 @@ void BattleSim() {
 	cout << endl << endl << "---------------------BATTLE-FINISH----------------------------" << endl;
 
 }
-
+//NOTE TO SELF: MAKE STUFF COST MONEY
 void shop() {
 	char input = 'a';
 	cout << endl << endl << "---------------------------------------------------------" << endl;
-	cout << "welcome to the shop!" << endl;
+	cout << "What are you doing here? Oh well anyways welcome to my shop." << endl;
 	cout << "type 'q' to quit" << endl;
 	while (input != 'q') {
-		cout << "Pick an item: c) Chips m) MANGO d) cheese" << endl;
+		cout << "Pick an item: S) Shield (+50 HP) D) Damage Potion (Chance to do more damage) ?) ???" << endl;
 		cin >> input;
 		switch (input) {
 		case 'c':
@@ -167,7 +198,7 @@ void shop() {
 			cout << "Heres your MANGO" << endl;
 			inventory[1] = "MANGO";
 			break;
-		case 'd':
+		case '?':
 			cout << "Heres your CHEESE, it isn't drippy" << endl;
 			inventory[2] = "Cheese";
 			break;
