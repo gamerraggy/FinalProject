@@ -8,6 +8,7 @@ int playerHealth = 100;
 //function declaration
 void shop();
 void BattleSim();
+void BossSim();
 
 int main() {
 	cout << "make sure to use all lower capitals, and if the word" << endl;
@@ -35,20 +36,19 @@ int main() {
 
 			break;
 		case 2:
-			cout << "You walk south and see a man with a ski mask on" << endl;
-			cout << "He looks like he wants to fight but hes injured" << endl;
-			cout << "You can FIGHT, go NORTH or go EAST" << endl;
+			cout << "You walk into a small room where you accidently" << endl;
+			cout << "step on a makeshift bear trap.." << endl;
+			cout << "You can go NORTH or EAST" << endl;
+			playerHealth -= 5;
 			cin >> input;
 			if (input == "north")
 				room = 1;
-			else if (input == "fight")
-				cout << "Why? Hes already injured, lets do that again" << endl;
 			else if (input == "east")
 				room = 3;
 			break;
 		case 3:
 			cout << "You continue foward and hear weird noises.." << endl;
-			cout << "You see a closet making noise.." << endl;
+			cout << "You see hear weird noises in the next room.." << endl;
 			cout << "You can go WEST or EAST..." << endl;
 			cin >> input;
 			if (input == "west")
@@ -180,6 +180,48 @@ void BattleSim() {
 	cout << endl << endl << "---------------------BATTLE-FINISH----------------------------" << endl;
 
 }
+
+void BossSim() {
+	int BossHealth = 100; //LOCAL variable: can only be seen and used in this function
+	int damage;
+	char dummy;
+	cout << endl << endl << "---------------------ENCOUNTER----------------------------" << endl;
+	cout << "The boss growls" << endl;
+	while (playerHealth > 0 && BossHealth > 0) {
+		//player DMG
+		damage = rand() % 11 + 5; //number between 0-10
+		cout << "You hit the monster for" << " " << damage << " " << "damage" << endl;
+		BossHealth -= damage;
+		cout << "Press any key to continue" << endl;
+		cin >> dummy;
+
+		//monster DMG
+		damage = rand() % 21 + 3; //number between 0-20
+		cout << "The monster hits you for" << " " << damage << " " << "damage" << endl;
+		playerHealth -= damage;
+		cout << "Press any key to continue" << endl;
+		cin >> dummy;
+
+
+		//value print for health
+		if (playerHealth > 0)
+			cout << "HP: " << playerHealth << endl;
+		else
+			cout << "You died" << endl;
+		if (BossHealth > 0)
+			cout << "Boss HP:" << BossHealth << endl;
+		else
+			cout << "You survived" << endl;
+		cout << endl;
+
+	} // end of mini loop
+
+	cout << endl << endl << "---------------------BATTLE-FINISH----------------------------" << endl;
+
+}
+
+
+
 //NOTE TO SELF: MAKE STUFF COST MONEY
 void shop() {
 	char input = 'a';
@@ -190,11 +232,11 @@ void shop() {
 		cout << "Pick an item: S) Shield (+50 HP) D) Damage Potion (Chance to do more damage) ?) ???" << endl;
 		cin >> input;
 		switch (input) {
-		case 'c':
-			cout << "Heres your CHIPS" << endl;
+		case 's':
+			cout << "You grabbed a huge iron shield." << endl;
 			inventory[0] = "Chips";
 			break;
-		case 'm':
+		case 'd':
 			cout << "Heres your MANGO" << endl;
 			inventory[1] = "MANGO";
 			break;
