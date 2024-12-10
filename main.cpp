@@ -57,7 +57,7 @@ int main() {
 				room = 4;
 			break;
 		case 4:
-			//BattleSim(); //NEED TO ADD LATER BUT NOT RIGHT NOW
+			BattleSim(); 
 			cout << "There is a huge metal door.." << endl;
 			cout << "You can go WEST or SOUTH." << endl;
 			cin >> input;
@@ -132,7 +132,8 @@ int main() {
 				room = 10;
 			break;
 		case 10:
-			cout << "A huge slime blob stand before you." << endl;
+			//cout << "A huge slime blob stands before you." << endl;
+			BossSim();
 		}// end of game loop
 
 	}if (playerHealth <= 0)
@@ -186,7 +187,7 @@ void BossSim() {
 	int damage;
 	char dummy;
 	cout << endl << endl << "---------------------ENCOUNTER----------------------------" << endl;
-	cout << "The boss growls" << endl;
+	cout << "The boss looks at you..." << endl;
 	while (playerHealth > 0 && BossHealth > 0) {
 		//player DMG
 		damage = rand() % 11 + 5; //number between 0-10
@@ -213,7 +214,7 @@ void BossSim() {
 		else
 			cout << "You survived" << endl;
 		cout << endl;
-
+		
 	} // end of mini loop
 
 	cout << endl << endl << "---------------------BATTLE-FINISH----------------------------" << endl;
