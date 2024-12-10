@@ -1,4 +1,5 @@
 #include<iostream>
+#include<Windows.h>
 using namespace std;
 //VARIABLE IS GLOBAL
 //inventory using array
@@ -9,8 +10,19 @@ int playerHealth = 100;
 void shop();
 void BattleSim();
 void BossSim();
+bool room1 = false;
+	bool room2 = false;
+	bool room3 = false;
+	bool room4 = false;
+	bool room5 = false;
+	bool room6 = false;
+	bool room7 = false;
+	bool room8 = false;
+	bool room9 = false;
+	bool room10 = false;
 
 int main() {
+	srand(time(NULL)); //seeds your number GEN
 	cout << "make sure to use all lower capitals, and if the word" << endl;
 	cout << "is all capitals then its an path you can type." << endl;
 	cout << "YOU ARE EMPLOYED!" << endl;
@@ -18,11 +30,20 @@ int main() {
 	cout << "trespassing on abandoned buildings. Today is your first" << endl;
 	cout << "day on the job. Well what are you" << endl;
 	cout << "waiting for? Go get em champ!" << endl;
-	srand(time(NULL)); //seeds your number GEN
+
 	int room = 1;
 	string input;
-	while (playerHealth > 0) { //game loop
+	
 
+	while (playerHealth > 0) { //game loop
+		
+		cout << endl;
+		cout << "Inventory: ";
+		for (int i = 0; i < 10; i++)
+			cout << inventory[i] << " | ";
+		cout << endl << endl;
+		cout << "Money: " << money << endl;
+		cout << endl; 
 		switch (room) {
 		case 1:
 			cout << "You walk in the building and see an old reception desk. You can go NORTH or SOUTH." << endl;
@@ -36,10 +57,15 @@ int main() {
 
 			break;
 		case 2:
-			cout << "You walk into a small room where you accidently" << endl;
-			cout << "step on a makeshift bear trap.." << endl;
+			if (room2 == false) {
+				cout << "You walk into a small room where you accidently" << endl;
+				cout << "step on a makeshift bear trap.." << endl;
+				cout << "You also found money!" << endl;
+				playerHealth -= 5;
+				money += 5;
+				room2 = true;
+			}
 			cout << "You can go NORTH or EAST" << endl;
-			playerHealth -= 5;
 			cin >> input;
 			if (input == "north")
 				room = 1;
@@ -186,6 +212,8 @@ void BossSim() {
 	int BossHealth = 100; //LOCAL variable: can only be seen and used in this function
 	int damage;
 	char dummy;
+	system("color FF");
+	system("pause");
 	cout << endl << endl << "---------------------ENCOUNTER----------------------------" << endl;
 	cout << "The boss looks at you..." << endl;
 	while (playerHealth > 0 && BossHealth > 0) {
