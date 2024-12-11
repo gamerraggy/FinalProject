@@ -102,10 +102,10 @@ int main() {
 				if (input == "nah" || input == "no")
 					cout << "I told you should've grabbed it! Theres a goblin!!!" << endl, BattleSim();
 				else if (input == "grab" || input == "ok" || input == "okay")
-					cout << "Oh no! The dollar was on a string.. RUN!!" << endl, BattleSim();
+					cout << "Oh no! The dollar was on a string.." << endl, BattleSim(), money += 5;
 				room4 = true;
 				break;
-				
+
 			}
 			cout << "There is a huge metal door.." << endl;
 			cout << "You can go WEST or SOUTH." << endl;
@@ -115,7 +115,7 @@ int main() {
 			if (input == "south")
 				room = 5;
 			break;
-		case 5:			
+		case 5:
 			cout << "You can OPEN or go NORTH." << endl;
 			if (inventory[1] != "Sword") {
 				cout << "There is a chest on the floor but its locked" << endl;
@@ -193,6 +193,7 @@ int main() {
 }
 
 void BattleSim() {
+	system("color 47");
 	int MonsterHealth = 20; //LOCAL variable: can only be seen and used in this function
 	int damage;
 	char dummy;
@@ -228,7 +229,7 @@ void BattleSim() {
 	} // end of mini loop
 
 	cout << endl << endl << "---------------------BATTLE-FINISH----------------------------" << endl;
-
+	system("color 07");
 }
 
 void BossSim() {
@@ -286,15 +287,15 @@ void shop() {
 		switch (input) {
 		case 's':
 			cout << "You grabbed a huge iron shield." << endl;
-			inventory[0] = "Chips";
+			inventory[2] = "Chips";
 			break;
 		case 'd':
 			cout << "Heres your MANGO" << endl;
-			inventory[1] = "MANGO";
+			inventory[3] = "MANGO";
 			break;
 		case '?':
 			cout << "Heres your CHEESE, it isn't drippy" << endl;
-			inventory[2] = "Cheese";
+			inventory[4] = "Cheese";
 			break;
 		}
 
