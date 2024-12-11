@@ -11,15 +11,15 @@ void shop();
 void BattleSim();
 void BossSim();
 bool room1 = false;
-	bool room2 = false;
-	bool room3 = false;
-	bool room4 = false;
-	bool room5 = false;
-	bool room6 = false;
-	bool room7 = false;
-	bool room8 = false;
-	bool room9 = false;
-	bool room10 = false;
+bool room2 = false;
+bool room3 = false;
+bool room4 = false;
+bool room5 = false;
+bool room6 = false;
+bool room7 = false;
+bool room8 = false;
+bool room9 = false;
+bool room10 = false;
 
 int main() {
 	srand(time(NULL)); //seeds your number GEN
@@ -33,17 +33,19 @@ int main() {
 
 	int room = 1;
 	string input;
-	
+
 
 	while (playerHealth > 0) { //game loop
-		
+
 		cout << endl;
 		cout << "Inventory: ";
 		for (int i = 0; i < 10; i++)
 			cout << inventory[i] << " | ";
 		cout << endl << endl;
 		cout << "Money: " << money << endl;
-		cout << endl; 
+		cout << endl;
+		cout << "Health: " << playerHealth << endl;
+		cout << endl;
 		switch (room) {
 		case 1:
 			cout << "You walk in the building and see an old reception desk. You can go NORTH or SOUTH." << endl;
@@ -52,8 +54,10 @@ int main() {
 				room = 2;
 			else if (input == "north")
 				room = 6;
-			else if (input == "key" || "grab")
+			else if (input == "key") {
 				inventory[0] = "Key";
+
+			}
 
 			break;
 		case 2:
@@ -73,8 +77,17 @@ int main() {
 				room = 3;
 			break;
 		case 3:
-			cout << "You continue foward and hear weird noises.." << endl;
-			cout << "You see hear weird noises in the next room.." << endl;
+			if (room3 == false) {
+				cout << "You continue foward and see a small goblin." << endl;
+				cout << "Goblin: If you give me some HP ill give you money.." << endl;
+				cout << "Do you want to GIVE HEALTH to goblin?" << endl;
+				cin >> input;
+				if (input == "health" || input == "give" || input == "yes")
+					playerHealth -= 10, money += 10, cout << "Pleasure doing buisness with you!" << endl;
+				else
+					cout << "Your loss.." << endl;
+				room3 = true;
+			}
 			cout << "You can go WEST or EAST..." << endl;
 			cin >> input;
 			if (input == "west")
@@ -83,7 +96,17 @@ int main() {
 				room = 4;
 			break;
 		case 4:
-			BattleSim(); 
+			if (room4 == false) {
+				cout << "ooh! a dollar! GRAB it!" << endl;
+				cin >> input;
+				if (input == "nah" || input == "no")
+					cout << "I told you should've grabbed it! Theres a goblin!!!" << endl, BattleSim();
+				else if (input == "grab" || input == "ok" || input == "okay")
+					cout << "Oh no! The dollar was on a string.. RUN!!" << endl, BattleSim();
+				room4 = true;
+				break;
+				
+			}
 			cout << "There is a huge metal door.." << endl;
 			cout << "You can go WEST or SOUTH." << endl;
 			cin >> input;
@@ -92,7 +115,7 @@ int main() {
 			if (input == "south")
 				room = 5;
 			break;
-		case 5:
+		case 5:			
 			cout << "You can OPEN or go NORTH." << endl;
 			if (inventory[1] != "Sword") {
 				cout << "There is a chest on the floor but its locked" << endl;
@@ -126,7 +149,7 @@ int main() {
 				room = 1;
 			else if (input == "nah")
 				cout << "Goblin: 'raaa raa go' (I didn't know you were chill like that)" << endl;
-				room = 7;
+			room = 7;
 			break;
 		case 7:
 			cout << "You walk into a fancy room with a huge door." << endl;
@@ -174,7 +197,7 @@ void BattleSim() {
 	int damage;
 	char dummy;
 	cout << endl << endl << "---------------------ENCOUNTER----------------------------" << endl;
-	cout << "an orge attacked!" << endl;
+	cout << "a GOBLIN attacked!" << endl;
 	while (playerHealth > 0 && MonsterHealth > 0) {
 		//player DMG
 		damage = rand() % 11 + 5; //number between 0-10
@@ -242,7 +265,7 @@ void BossSim() {
 		else
 			cout << "You survived" << endl;
 		cout << endl;
-		
+
 	} // end of mini loop
 
 	cout << endl << endl << "---------------------BATTLE-FINISH----------------------------" << endl;
