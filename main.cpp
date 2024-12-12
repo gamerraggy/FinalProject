@@ -6,10 +6,6 @@ using namespace std;
 string inventory[10];
 int money = 10;
 int playerHealth = 100;
-//function declaration
-void shop();
-void BattleSim();
-void BossSim();
 bool room1 = false;
 bool room2 = false;
 bool room3 = false;
@@ -20,11 +16,16 @@ bool room7 = false;
 bool room8 = false;
 bool room9 = false;
 bool room10 = false;
+//function declaration
+void shop();
+void BattleSim();
+void BossSim();
+void stats();
 
 int main() {
 	srand(time(NULL)); //seeds your number GEN
 	cout << "make sure to use all lower capitals, and if the word" << endl;
-	cout << "is all capitals then its an path you can type." << endl;
+	cout << "Type: STATS to see money, hp, and your inventory." << endl;
 	cout << "YOU ARE EMPLOYED!" << endl;
 	cout << "You are hired at a private company and you have to deal with people" << endl;
 	cout << "trespassing on abandoned buildings. Today is your first" << endl;
@@ -37,15 +38,6 @@ int main() {
 
 	while (playerHealth > 0) { //game loop
 
-		cout << endl;
-		cout << "Inventory: ";
-		for (int i = 0; i < 10; i++)
-			cout << inventory[i] << " | ";
-		cout << endl << endl;
-		cout << "Money: " << money << endl;
-		cout << endl;
-		cout << "Health: " << playerHealth << endl;
-		cout << endl;
 		switch (room) {
 		case 1:
 			cout << "You walk in the building and see an old reception desk. You can go NORTH or SOUTH." << endl;
@@ -54,11 +46,13 @@ int main() {
 				room = 2;
 			else if (input == "north")
 				room = 6;
-			else if (input == "key") {
-				inventory[0] = "Key";
-
-			}
-
+			else if (input == "stats")
+				stats(); 
+			else if (input == "key")
+				if (inventory[0] != "Key") {
+					inventory[0] = "Key";
+				}
+				else cout << "You already have the key." << endl;
 			break;
 		case 2:
 			if (room2 == false) {
@@ -75,6 +69,8 @@ int main() {
 				room = 1;
 			else if (input == "east")
 				room = 3;
+			else if (input == "stats")
+				stats();
 			break;
 		case 3:
 			if (room3 == false) {
@@ -94,6 +90,8 @@ int main() {
 				room = 2;
 			else if (input == "east")
 				room = 4;
+			else if (input == "stats")
+				stats();
 			break;
 		case 4:
 			if (room4 == false) {
@@ -114,6 +112,8 @@ int main() {
 				room = 3;
 			if (input == "south")
 				room = 5;
+			else if (input == "stats")
+				stats();
 			break;
 		case 5:
 			cout << "You can OPEN or go NORTH." << endl;
@@ -127,7 +127,9 @@ int main() {
 				if (inventory[0] == "Key") {
 					cout << "You unlock the chest with the KEY and got a SWORD!" << endl;
 					inventory[1] = "Sword";
-					inventory[0] = " "; //no more key
+				}
+				else if (inventory[1] == "Sword") {
+					cout << "You already opened the chest." << endl;
 				}
 				else {
 					cout << "The chest rattles. It is locked" << endl;
@@ -135,6 +137,8 @@ int main() {
 				}
 			else if (input == "north")
 				room = 4;
+			else if (input == "stats")
+				stats();
 			break;
 		case 6:
 			cout << "You walk into the room and see a goblin blocking the door" << endl;
@@ -147,9 +151,8 @@ int main() {
 				room = 7;
 			else if (input == "south")
 				room = 1;
-			else if (input == "nah")
-				cout << "Goblin: 'raaa raa go' (I didn't know you were chill like that)" << endl;
-			room = 7;
+			else if (input == "stats")
+				stats();
 			break;
 		case 7:
 			cout << "You walk into a fancy room with a huge door." << endl;
@@ -161,6 +164,8 @@ int main() {
 				room = 8;
 			else if (input == "rest")
 				cout << "Go Foward" << endl;
+			else if (input == "stats")
+				stats();
 			break;
 		case 8:
 			cout << "After what felt like forever you reach a huge metal door." << endl;
@@ -170,6 +175,8 @@ int main() {
 				room = 7;
 			else if (input == "east")
 				room = 9;
+			else if (input == "stats")
+				stats();
 			break;
 		case 9:
 			shop();
@@ -179,6 +186,8 @@ int main() {
 				cout << "I just said you couldn't go west" << endl;
 			if (input == "east")
 				room = 10;
+			else if (input == "stats")
+				cout << "Look closely." << endl, stats();
 			break;
 		case 10:
 			//cout << "A huge slime blob stands before you." << endl;
@@ -236,8 +245,7 @@ void BossSim() {
 	int BossHealth = 100; //LOCAL variable: can only be seen and used in this function
 	int damage;
 	char dummy;
-	system("color FF");
-	system("pause");
+	system("color 04");
 	cout << endl << endl << "---------------------ENCOUNTER----------------------------" << endl;
 	cout << "The boss looks at you..." << endl;
 	while (playerHealth > 0 && BossHealth > 0) {
@@ -282,23 +290,37 @@ void shop() {
 	cout << "What are you doing here? Oh well anyways welcome to my shop." << endl;
 	cout << "type 'q' to quit" << endl;
 	while (input != 'q') {
-		cout << "Pick an item: S) Shield (+50 HP) D) Damage Potion (Chance to do more damage) ?) ???" << endl;
+		cout << "Pick an item: S) Shield (Take less damage) D) Dmg Potion (Chance to do more damage) ?) ???" << endl;
 		cin >> input;
 		switch (input) {
 		case 's':
 			cout << "You grabbed a huge iron shield." << endl;
-			inventory[2] = "Chips";
+			inventory[2] = "Sheild";
 			break;
 		case 'd':
-			cout << "Heres your MANGO" << endl;
-			inventory[3] = "MANGO";
+			cout << "Heres your Dmg Potion" << endl;
+			inventory[3] = "Potion";
 			break;
 		case '?':
-			cout << "Heres your CHEESE, it isn't drippy" << endl;
-			inventory[4] = "Cheese";
+			cout << "Heres your ???" << endl;
+			inventory[4] = "???";
 			break;
 		}
 
 	}
 	cout << "---------------------------------------------------------" << endl;
+}
+
+void stats() {
+
+	cout << endl;
+	cout << "Inventory: ";
+	for (int i = 0; i < 10; i++)
+		cout << inventory[i] << " | ";
+	cout << endl << endl;
+	cout << "Money: " << money << endl;
+	cout << endl;
+	cout << "Health: " << playerHealth << endl;
+	cout << endl;
+
 }
