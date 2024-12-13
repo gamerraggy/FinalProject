@@ -125,11 +125,17 @@ int main() {
 			cin >> input;
 			if (input == "open")
 				if (inventory[0] == "Key") {
-					cout << "You unlock the chest with the KEY and got a SWORD!" << endl;
+					if (inventory[1] == "Sword") {
+						cout << "You already opened the chest." << endl;
+
+					}
+					else { cout << "You unlock the chest with the KEY and got a SWORD!" << endl;
 					inventory[1] = "Sword";
-				}
-				else if (inventory[1] == "Sword") {
-					cout << "You already opened the chest." << endl;
+					cout << "                    |__________________________________ " << endl;
+					cout << " 	////////////|                                 / " << endl;
+					cout << " 	\\\\\\\\\\\\\\\\\\\\\\\\|________________________________/ " << endl;
+					cout << "                    |                                  " << endl;
+					}
 				}
 				else {
 					cout << "The chest rattles. It is locked" << endl;
@@ -141,13 +147,35 @@ int main() {
 				stats();
 			break;
 		case 6:
-			cout << "You walk into the room and see a goblin blocking the door" << endl;
-			cout << "Goblin: 'goo goo ga ga' (Fight me to get through or pay me)" << endl;
-			cout << "FIGHT or PAY 20 coins? Or just go SOUTH." << endl;
-			cin >> input;
-			if (input == "fight")
-				BattleSim();
-			else if (input == "pay")
+			if (room6 == false) {
+				cout << "You walk into the room and see a goblin blocking the door" << endl;
+				cout << "Goblin: 'goo goo ga ga' (Fight me to get through or pay me)" << endl;
+				cout << "FIGHT or PAY 20 coins? Or just go SOUTH." << endl;
+				cin >> input;
+				if (input == "fight")
+					BattleSim();
+				else if (input == "pay")
+					if (money > 20) {
+						money -= 20;
+						room = 7;
+						room6 = true;
+					}
+					
+					else {
+						cout << "GRAHHH (Not enough!)" << endl;
+						BattleSim();
+						room = 7;
+						room6 = true;
+					}
+				else if (input == "south")
+					room = 1;
+				else if (input == "stats")
+					stats();
+				break;
+			}
+			cout << "You step over the corspe of the goblin" << endl;
+			cout << "You can go east or south." << endl;
+			if (input == "east")
 				room = 7;
 			else if (input == "south")
 				room = 1;
