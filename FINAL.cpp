@@ -253,6 +253,7 @@ int main() {
 				cout << "wrong abanoned building. YOUR ARE UNEMPLOYED" << endl;
 				system("color 76");
 				system("pause");
+				return 0; //kills your game
 			}
 
 		}// end of game loop
